@@ -1,5 +1,6 @@
 package com.example.tilas.mapper;
 import com.example.tilas.pojo.Emp;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
@@ -23,4 +24,13 @@ public interface EmpMapper {
     List<Emp> list(String name, Short gender, LocalDate begin, LocalDate end);
 
     void deleteByIds(Integer[] ids);
+
+    @Insert("insert into emp(username, name, gender, image, job, entrydate, dept_id, create_time, update_time)" +
+            "values (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, #{createTime}, #{updateTime})")
+    void addEmp(Emp emp);
+
+    @Select("select * from emp where id = #{id}")
+    Emp findById(Integer id);
+
+    void updateEmp(Emp emp); // 修改员工数据
 }

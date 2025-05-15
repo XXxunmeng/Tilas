@@ -1,5 +1,6 @@
 package com.example.tilas.controller;
 
+import com.example.tilas.pojo.Emp;
 import com.example.tilas.pojo.PageBean;
 import com.example.tilas.pojo.Result;
 import com.example.tilas.service.EmpService;
@@ -34,6 +35,27 @@ public class EmpController {
     public Result deleteByIds(@PathVariable Integer[] ids) {
         log.info("批量删除员工数据");
         empService.deleteByIds(ids);
+        return Result.success();
+    }
+
+    @PostMapping
+    public Result addEmp(@RequestBody Emp emp) {
+        log.info("添加员工数据");
+        empService.addEmp(emp);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    public Result findById(@PathVariable Integer id) {
+        log.info("根据id查询员工数据");
+        Emp emp = empService.findById(id);
+        return Result.success(emp);
+    }
+
+    @PutMapping
+    public Result modifyEmp(@RequestBody Emp emp) {
+        log.info("修改员工数据");
+        empService.modifyEmp(emp);
         return Result.success();
     }
 

@@ -1,5 +1,6 @@
 package com.example.tilas.service;
 
+import com.example.tilas.pojo.Emp;
 import com.example.tilas.pojo.PageBean;
 
 import java.time.LocalDate;
@@ -10,4 +11,9 @@ public interface EmpService {
 
     void deleteByIds(Integer[] ids); // 批量删除员工信息
 
+    void addEmp(Emp emp); // 添加员工数据
+
+    Emp findById(Integer id); // 根据id查询员工数据
+
+    void modifyEmp(Emp emp); // 修改员工数据
 }

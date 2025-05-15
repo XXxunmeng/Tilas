@@ -7,9 +7,11 @@ import com.example.tilas.service.EmpService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,5 +39,25 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public void deleteByIds(Integer[] ids) {
         empMapper.deleteByIds(ids);
+    }
+
+    @Override
+    public void addEmp(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        emp.setCreateTime(LocalDateTime.now());
+        empMapper.addEmp(emp);
+    }
+
+    @Override
+    public Emp findById(Integer id) {
+        Emp emp = empMapper.findById(id);
+        return emp;
+    }
+
+    @Override
+    public void modifyEmp(Emp emp) {
+        System.out.println(emp);
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateEmp(emp);
     }
 }
