@@ -33,4 +33,7 @@ public interface EmpMapper {
     Emp findById(Integer id);
 
     void updateEmp(Emp emp); // 修改员工数据
+
+    @Select("select * from emp where username = #{username} and password = #{password}")
+    Emp check(Emp emp); // 检查用户名和密码是否正确
 }

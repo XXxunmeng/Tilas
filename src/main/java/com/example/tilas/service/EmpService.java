@@ -16,4 +16,6 @@ public interface EmpService {
     Emp findById(Integer id); // 根据id查询员工数据
 
     void modifyEmp(Emp emp); // 修改员工数据
+
+    Emp check(Emp emp); // 检查用户名和密码是否正确
 }
