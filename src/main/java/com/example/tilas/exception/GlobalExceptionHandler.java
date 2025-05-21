@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     // 全局异常处理器
-
     @ExceptionHandler(Exception.class) // 指定捕获所有异常
     public Result ex(Exception e) {
         e.printStackTrace();

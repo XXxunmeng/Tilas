@@ -36,12 +36,8 @@ public class DeptController {
     public Result dele(@PathVariable Integer id) {
         // PathVariable -- 路由参数
         log.info("删除指定部门数据");
-        boolean deleResult = deptService.dele(id);
-        if (deleResult) {
-            return Result.success();
-        } else {
-            return Result.error("未删除成功");
-        }
+        deptService.dele(id);
+        return Result.success();
     }
 
     /**

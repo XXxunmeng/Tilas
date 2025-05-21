@@ -1,5 +1,6 @@
 package com.example.tilas.mapper;
 import com.example.tilas.pojo.Emp;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -36,4 +37,7 @@ public interface EmpMapper {
 
     @Select("select * from emp where username = #{username} and password = #{password}")
     Emp check(Emp emp); // 检查用户名和密码是否正确
+
+    @Delete("delete from emp where dept_id=#{id}")
+    void deleteByDept(Integer id);
 }

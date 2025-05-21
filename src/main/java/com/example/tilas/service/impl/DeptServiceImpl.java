@@ -1,11 +1,16 @@
 package com.example.tilas.service.impl;
 
+import com.example.tilas.mapper.DeptLogMapper;
 import com.example.tilas.mapper.DeptMapper;
+import com.example.tilas.mapper.EmpMapper;
 import com.example.tilas.pojo.Dept;
+import com.example.tilas.pojo.DeptLog;
+import com.example.tilas.service.DeptLogService;
 import com.example.tilas.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,25 +20,40 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
     @Autowired
     private DeptMapper deptMapper; // Mapper的依赖注入
+    @Autowired
+    private EmpMapper empMapper;
+    @Autowired
+    private DeptLogService deptLogService;
     @Override
     public List<Dept> list() {
         return deptMapper.list();
     }
 
     @Override
-    public boolean dele(Integer id) {
-        return deptMapper.dele(id);
+    @Transactional //事务注解
+    public void dele(Integer id){
+        try {
+            empMapper.deleteByDept(id);
+//            int t = 1 / 0; // 伪造一个异常
+//            System.out.println(t);
+            deptMapper.dele(id);
+        } finally {
+            DeptLog deptLog = new DeptLog();
+            deptLog.setDescription("解散部门指令执行，此次解散的部门id为" + id);
+            deptLog.setCreateTime(LocalDateTime.now());
+            deptLogService.insert(deptLog);
+        }
     }
 
     @Override
     public boolean insert(Dept dept) {
         // 检查一下部门名称是否重复
         List<Dept> depts = list();
-        for (Dept d : depts) {
-            if (d.getName().equals(dept.getName())) {
-                return false;
-            }
-        }
+//        for (Dept d : depts) {
+//            if (d.getName().equals(dept.getName())) {
+//                return false;
+//            }
+//        }
         dept.setUpdateTime(LocalDateTime.now());
         dept.setCreateTime(LocalDateTime.now());
         return deptMapper.insert(dept);

@@ -8,7 +8,7 @@ public interface DeptService {
 
     List<Dept> list(); // 查
 
-    boolean dele(Integer id); // 删
+    void dele(Integer id); // 删
 
     boolean insert(Dept dept); // 增
 
