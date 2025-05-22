@@ -1,4 +1,5 @@
 package com.example.tilas.controller;
+import com.example.tilas.anno.Log;
 import com.example.tilas.pojo.Dept;
 import com.example.tilas.pojo.Result;
 import com.example.tilas.service.DeptService;
@@ -32,6 +33,7 @@ public class DeptController {
     /**
      * 根据id删除部门
      */
+    @Log
     @DeleteMapping("/{id}")
     public Result dele(@PathVariable Integer id) {
         // PathVariable -- 路由参数
@@ -44,6 +46,7 @@ public class DeptController {
      * 增加部门
      * 使用RequestBody注解能够从前端json获取实体
      */
+    @Log
     @PostMapping
     public Result insert(@RequestBody Dept dept) {
         log.info("给定部门名增加部门");
@@ -70,6 +73,7 @@ public class DeptController {
     /**
      * 修改部门数据
      */
+    @Log
     @PutMapping
     public Result modify(@RequestBody Dept dept) {
         log.info("修改部门数据");

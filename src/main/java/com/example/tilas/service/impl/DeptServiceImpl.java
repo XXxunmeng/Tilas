@@ -1,10 +1,9 @@
 package com.example.tilas.service.impl;
 
-import com.example.tilas.mapper.DeptLogMapper;
 import com.example.tilas.mapper.DeptMapper;
 import com.example.tilas.mapper.EmpMapper;
 import com.example.tilas.pojo.Dept;
-import com.example.tilas.pojo.DeptLog;
+import com.example.tilas.pojo.OperateLog;
 import com.example.tilas.service.DeptLogService;
 import com.example.tilas.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +37,11 @@ public class DeptServiceImpl implements DeptService {
 //            System.out.println(t);
             deptMapper.dele(id);
         } finally {
-            DeptLog deptLog = new DeptLog();
-            deptLog.setDescription("解散部门指令执行，此次解散的部门id为" + id);
-            deptLog.setCreateTime(LocalDateTime.now());
-            deptLogService.insert(deptLog);
+            System.out.println("error");
+//            OperateLog operateLog = new OperateLog();
+//            operateLog.setDescription("解散部门指令执行，此次解散的部门id为" + id);
+//            operateLog.setCreateTime(LocalDateTime.now());
+//            deptLogService.insert(operateLog);
         }
     }
 

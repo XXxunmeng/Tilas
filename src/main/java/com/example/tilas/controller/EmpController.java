@@ -1,5 +1,6 @@
 package com.example.tilas.controller;
 
+import com.example.tilas.anno.Log;
 import com.example.tilas.pojo.Emp;
 import com.example.tilas.pojo.PageBean;
 import com.example.tilas.pojo.Result;
@@ -31,6 +32,7 @@ public class EmpController {
     }
 
     // 删除员工数据
+    @Log
     @DeleteMapping("/{ids}")
     public Result deleteByIds(@PathVariable Integer[] ids) {
         log.info("批量删除员工数据");
@@ -38,6 +40,7 @@ public class EmpController {
         return Result.success();
     }
 
+    @Log
     @PostMapping
     public Result addEmp(@RequestBody Emp emp) {
         log.info("添加员工数据");
@@ -52,6 +55,7 @@ public class EmpController {
         return Result.success(emp);
     }
 
+    @Log
     @PutMapping
     public Result modifyEmp(@RequestBody Emp emp) {
         log.info("修改员工数据");
